@@ -24,11 +24,11 @@ public class LoginRegisterController {
 	public static final Logger logger = LoggerFactory.getLogger(LoginRegisterController.class);
 	
 	@Autowired
-	UserService userService = new UserServiceImpl();
+	UserService userService;
 	
 	// -------------------User Login---------------------------------------------
 	@RequestMapping(value = "/login/", method = RequestMethod.POST)
-	public ResponseEntity<String> login(@RequestBody User checkUser, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<String> login(@RequestBody User checkUser) {
 		logger.info("Logging User : {}", checkUser);
 		
 		User user = userService.login(checkUser.getEmailId(), checkUser.getPassword());
@@ -44,7 +44,7 @@ public class LoginRegisterController {
 	
 	// -------------------User Register---------------------------------------------
 	@RequestMapping(value = "/register/", method = RequestMethod.POST)
-	public ResponseEntity<String> register(@RequestBody User checkUser, UriComponentsBuilder ucBuilder){
+	public ResponseEntity<String> register(@RequestBody User checkUser){
 		logger.info("Register user : {}", checkUser);
 		
 		boolean registered = userService.register(checkUser);
